@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   getRandomVerseBtn.addEventListener('click', async () => {
     try {
-      const response = await fetch('/get-random-verse', { method: 'POST' });
+      const response = await fetch('/get-random-verse', { method: 'GET' });
       if (response.ok) {
         const data = await response.json();
         verseContainer.textContent = `${data.verse}`;

@@ -1,1 +1,52 @@
-<p>chapters page here</p>
+<div class="selection-container">
+    <h1>Translation Comparison</h1>
+
+    <div class="selection-row">
+        <div>
+            <label for="book-select">Book:</label>
+            <select id="book-select">
+                <option value="">Select a book</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="chapter-select">Chapter:</label>
+            <select id="chapter-select">
+            </select>
+        </div>
+    </div>
+
+    <div class="selection-row">
+        <div>
+            <label for="translation-select1">Translation 1:</label>
+            <select id="translation-select1">
+                <option value="NIV">NIV</option>
+                <option value="KJV">KJV</option>
+                <option value="ESV">ESV</option>
+                <option value="NLT">NLT</option>
+                <option value="ASV">ASV</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="translation-select2">Translation 2:</label>
+            <select id="translation-select2">
+                <option value="NIV">NIV</option>
+                <option value="KJV">KJV</option>
+                <option value="ESV">ESV</option>
+                <option value="NLT">NLT</option>
+                <option value="ASV">ASV</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="selection-row btn-container">
+        <button class="btn" onclick="changeChapter(-1)">Previous Chapter</button>
+        <button class="btn" onclick="changeChapter(1)">Next Chapter</button>
+    </div>
+</div>
+
+<div class="verses-display">
+    <div id="verses-container1"></div>
+    <div id="verses-container2"></div>
+</div>
