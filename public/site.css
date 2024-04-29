@@ -48,3 +48,13 @@ h1 {
   margin-top: 20px;
   z-index: 1;
 }
+
+p {
+  color: #555;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 60px;
+  z-index: 1;
+}
