@@ -4,7 +4,10 @@ import { getVerse, getRandomVerse, niceVerses } from '../data/verses.js';
 const router = Router();
 
 router.route('/').get(async (req, res) => {
-  res.render('home', { title: 'Random Bible Verse', niceVerses: niceVerses });
+  res.render('home', {
+    title: 'Bible Verse Generator',
+    niceVerses: niceVerses,
+  });
 });
 
 router.route('/get-random-verse').post(async (req, res) => {
