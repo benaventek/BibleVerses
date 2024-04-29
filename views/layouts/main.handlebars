@@ -1,5 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-{{{body}}}
+
+<head>
+    <meta charset='utf-8' />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{{title}}}</title>
+    <link rel='stylesheet' href='../../public/css/{{{css}}}.css' />
+    <link rel="icon" type="image/x-icon" href="/public/localimgs/favicon.ico">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <button class="hamburger">&#9776;</button>
+            <div class="nav-links">
+                <a href="/">Random Verse</a>
+                <a href="/chapters">Chapters</a>
+                <a href="/search">Search</a>
+            </div>
+        </nav>
+    </header>
+    <main>
+        {{{body}}}
+    </main>
+    {{#if partial}}
+    {{> (lookup . 'partial') }}
+    {{/if}}
+</body>
 
 </html>

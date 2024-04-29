@@ -1,0 +1,18 @@
+<div class="flex">
+    <div class="container">
+        <section id="verseSection">
+            <div id="verseContainer">
+            </div>
+            <div id="book">
+            </div>
+            <button id="getRandomVerseBtn">Get Random Verse</button>
+        </section>
+        <br>
+        <select id="verseDropdown">
+            <option value="">or select one here...</option>
+            {{#each niceVerses}}
+            <option value="{{this}}">{{this}}</option>
+            {{/each}}
+        </select>
+    </div>
+</div>

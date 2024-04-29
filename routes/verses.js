@@ -4,9 +4,29 @@ import { getVerse, getRandomVerse, niceVerses } from '../data/verses.js';
 const router = Router();
 
 router.route('/').get(async (req, res) => {
-  res.render('home', {
+  res.render('randomVerse', {
     title: 'Bible Verse Generator',
     niceVerses: niceVerses,
+    partial: 'randomVerse_partial',
+    css: 'randomVerse',
+  });
+});
+
+router.route('/chapters').get(async (req, res) => {
+  res.render('chapters', {
+    title: 'Chapter Search',
+    niceVerses: niceVerses,
+    partial: 'chapters_partial',
+    css: 'chapters',
+  });
+});
+
+router.route('/search').get(async (req, res) => {
+  res.render('search', {
+    title: 'Verse Search',
+    niceVerses: niceVerses,
+    partial: 'search_partial',
+    css: 'search',
   });
 });
 
