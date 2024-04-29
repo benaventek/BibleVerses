@@ -1,0 +1,50 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f0f0f0;
+}
+
+.container {
+  max-width: 600px;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  text-align: center;
+}
+
+#verseContainer {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+#book {
+  font-size: 18px;
+  color: #555;
+}
+
+#getRandomVerseBtn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#getRandomVerseBtn:hover {
+  background-color: #45a049;
+}
+h1 {
+  color: #555;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 20px;
+  z-index: 1;
+}

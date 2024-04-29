@@ -1,0 +1,67 @@
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="/public/site.css">
+</head>
+
+<header>
+    <h1>Random Verse Generator</h1>
+</header>
+
+<body>
+    <main class="container">
+        <section id="verseSection">
+            <div id="verseContainer">
+            </div>
+            <div id="book">
+            </div>
+            <button id="getRandomVerseBtn">Get Random Verse</button>
+        </section>
+        <br>
+        <select id="verseDropdown">
+            <option value="">or select one here...</option>
+            {{#each niceVerses}}
+            <option value="{{this}}">{{this}}</option>
+            {{/each}}
+        </select>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const getRandomVerseBtn = document.getElementById('getRandomVerseBtn');
+            const verseContainer = document.getElementById('verseContainer');
+            const verseDropdown = document.getElementById('verseDropdown');
+            const book = document.getElementById('book');
+
+            getRandomVerseBtn.addEventListener('click', async () => {
+                try {
+                    const response = await fetch('/get-random-verse', { method: 'POST' });
+                    if (response.ok) {
+                        const data = await response.json();
+                        verseContainer.textContent = `${data.verse}`;
+                        book.textContent = `${data.book.name} ${data.chapterId}:${data.verseId} NIV`;
+                    } else {
+                        throw new Error('Failed to fetch verse');
+                    }
+                } catch (error) {
+                    console.error(error);
+                }
+            });
+            verseDropdown.addEventListener('change', async (event) => {
+                const selectedVerse = event.target.value;
+                const response = await fetch('/get-verse', {
+                    method: 'POST', body: JSON.stringify({ verse: selectedVerse }), headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    verseContainer.textContent = `${data.verse}`;
+                    book.textContent = `${data.book.name} ${data.chapterId}:${data.verseId} NIV`;
+                } else {
+                    throw new Error('Failed to fetch verse');
+                }
+            });
+        });
+    </script>
+</body>
