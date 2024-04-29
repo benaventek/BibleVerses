@@ -1,5 +1,6 @@
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{title}}</title>
     <link rel="stylesheet" href="/public/site.css">
 </head>
@@ -41,6 +42,7 @@
                         const data = await response.json();
                         verseContainer.textContent = `${data.verse}`;
                         book.textContent = `${data.book.name} ${data.chapterId}:${data.verseId} NIV`;
+                        verseDropdown.selectedIndex = 0;
                     } else {
                         throw new Error('Failed to fetch verse');
                     }

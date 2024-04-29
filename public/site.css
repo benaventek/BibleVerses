@@ -58,3 +58,52 @@ p {
   margin-top: 60px;
   z-index: 1;
 }
+
+@media only screen and (max-width: 600px) {
+  body {
+    padding: 0 10px;
+  }
+
+  .container {
+    padding: 20px 15px;
+    max-width: calc(100% - 20px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin: 0 auto;
+    position: relative;
+    padding-top: 20px;
+  }
+
+  #verseContainer {
+    font-size: 20px;
+    margin-bottom: 20px;
+    line-height: 1.4;
+  }
+
+  #book {
+    font-size: 16px;
+    color: #333;
+  }
+
+  #getRandomVerseBtn {
+    padding: 12px 24px;
+    font-size: 18px;
+    border-radius: 8px;
+  }
+
+  h1 {
+    text-align: center;
+    top: 10px;
+    transform: translateX(-50%);
+    font-size: 26px;
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  p {
+    text-align: center;
+    transform: translateX(-50%);
+    font-size: 16px;
+    width: 100%;
+  }
+}
