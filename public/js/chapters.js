@@ -1,4 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const bookName = urlParams.get('book');
+  const chapterNumber = urlParams.get('chapter');
+  const verseNumber = urlParams.get('verse');
   const bookSelect = document.getElementById('book-select');
   const chapterSelect = document.getElementById('chapter-select');
   const translationSelect1 = document.getElementById('translation-select1');
@@ -8,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const hamburger = document.querySelector('.hamburger');
   const navLinks = document.querySelector('.nav-links');
 
-  // Populate the book select dropdown
   const chaptersPerBook = {
     Genesis: 50,
     Exodus: 40,
@@ -85,31 +88,59 @@ document.addEventListener('DOMContentLoaded', () => {
     bookSelect.appendChild(option);
   });
 
+  const oldTestamentLabel = document.createElement('optgroup');
+  oldTestamentLabel.label = 'Old Testament';
+  bookSelect.insertBefore(oldTestamentLabel, bookSelect.firstChild);
+
+  const newTestamentLabel = document.createElement('optgroup');
+  newTestamentLabel.label = 'New Testament';
+  bookSelect.insertBefore(newTestamentLabel, bookSelect.children[40]);
+
   function updateChapters() {
     const selectedBook = bookSelect.value;
     const chapters = chaptersPerBook[selectedBook];
-    chapterSelect.innerHTML = ''; // Clear existing options
+    chapterSelect.innerHTML = '';
     for (let i = 1; i <= chapters; i++) {
       const option = document.createElement('option');
       option.value = i;
       option.textContent = i;
       chapterSelect.appendChild(option);
     }
-    loadVerses(); // Load verses when chapters are updated
+    loadVerses();
   }
 
   bookSelect.addEventListener('change', updateChapters);
   chapterSelect.addEventListener('change', loadVerses);
-  translationSelect1.addEventListener('change', loadVerses); // Update verses when translation changes
-  translationSelect2.addEventListener('change', loadVerses); // Update verses when translation changes
+  translationSelect1.addEventListener('change', loadVerses);
+  translationSelect2.addEventListener('change', loadVerses);
 
   hamburger.addEventListener('click', () => {
     navLinks.classList.toggle('open');
   });
 
-  bookSelect.value = 'Genesis'; // Default book
-  translationSelect2.value = 'KJV'; // Default translation
-  updateChapters();
+  if (bookName && chapterNumber) {
+    bookSelect.value = bookName;
+    updateChapters();
+    chapterSelect.value = chapterNumber;
+    translationSelect2.value = 'KJV';
+    loadVerses();
+  } else {
+    bookSelect.value = 'Genesis';
+    translationSelect2.value = 'KJV';
+    updateChapters();
+    loadVerses();
+  }
+
+  if (verseNumber) {
+    const verseElement1 = document.querySelector(`.verse-${verseNumber}`);
+    const verseElement2 = document.querySelector(`.verse-${verseNumber}`);
+    if (verseElement1) {
+      verseElement1.scrollIntoView({ behavior: 'smooth' });
+    }
+    if (verseElement2) {
+      verseElement2.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
 });
 
 async function loadVerses() {
@@ -156,10 +187,11 @@ async function fetchAndDisplayVerses(
       const data = await response.json();
       versesContainer.innerHTML = `<h2>${translation}</h2>`;
       data.forEach((verse, index) => {
-        const verseElement = document.createElement('p');
-        verseElement.innerHTML = `<b style="color:#4caf50">${chapter}:${
+        const verseElement = document.createElement('div');
+        verseElement.classList.add(`verse-${index + 1}`);
+        verseElement.innerHTML = `<p class="verse-text"><b style="color:#4caf50">${chapter}:${
           index + 1
-        }</b> ${verse}`;
+        }</b> ${verse}</p>`;
         versesContainer.appendChild(verseElement);
       });
     } else {

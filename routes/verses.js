@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import {
+  verseSearch,
   getChapter,
   getChapterLength,
   getVerse,
@@ -31,7 +32,7 @@ router.route('/chapters').get(async (req, res) => {
 router.route('/search').get(async (req, res) => {
   res.render('search', {
     title: 'Verse Search',
-    niceVerses: niceVerses,
+    bibleBooks: bibleBooks,
     partial: 'search_partial',
     css: 'search',
   });
@@ -68,6 +69,16 @@ router.route('/get-chapter').post(async (req, res) => {
   } catch (e) {
     console.error(e);
     res.status(500).json({ error: 'Failed to fetch chapter' });
+  }
+});
+
+router.route('/get-search-results').post(async (req, res) => {
+  try {
+    const results = await verseSearch(req.body.keyword);
+    res.status(200).json(results);
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ error: 'Failed to fetch search results' });
   }
 });
 

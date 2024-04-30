@@ -7,6 +7,7 @@ const constructorMethod = (app) => {
   app.use('/get-random-verse', verseRoutes);
   app.use('/get-verse', verseRoutes);
   app.use('/get-chapter', verseRoutes);
+  app.use('/get-search-results', verseRoutes);
 
   app.use('*', (req, res) => {
     res.redirect('/');

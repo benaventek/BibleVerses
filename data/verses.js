@@ -19,7 +19,7 @@ const bookMapping = {
   Nehemiah: 16,
   Esther: 17,
   Job: 18,
-  Psalm: 19,
+  Psalms: 19,
   Proverbs: 20,
   Ecclesiastes: 21,
   'Song of Solomon': 22,
@@ -95,7 +95,7 @@ export const verseToCode = (verse) => {
     Nehemiah: 16,
     Esther: 17,
     Job: 18,
-    Psalm: 19,
+    Psalms: 19,
     Proverbs: 20,
     Ecclesiastes: 21,
     'Song of Solomon': 22,
@@ -382,7 +382,6 @@ export const getChapter = async (bookName, chapterID, translation) => {
   const bookID = bookMapping[bookName];
   const url = `https://bible-go-api.rkeplin.com/v1/books/${bookID}/chapters/${chapterID}?translation=${translation}`;
   const response = await axios.get(url);
-  //return an array of each verse in the chapter, just the .verse of each nothing else
   return response.data.map((verseObj) => verseObj.verse);
 };
 
@@ -391,4 +390,10 @@ export const getChapterLength = async (bookName, chapterID) => {
   const url = `https://bible-go-api.rkeplin.com/v1/books/${bookID}/chapters/${chapterID}`;
   const response = await axios.get(url);
   return response.data.verses.length;
+};
+
+export const verseSearch = async (query) => {
+  const url = `https://bible-go-api.rkeplin.com/v1/search?query=${query}`;
+  const response = await axios.get(url);
+  return response.data;
 };
